@@ -1,9 +1,10 @@
 import { ArchGenerator } from '@drax/arch';
 
 //Import schemas
+import { AgenteIASchema } from './schemas/agents/AgenteIASchema';
 
 const schemas = [
-    //add schemas
+    AgenteIASchema,
 ];
 
 const generator = new ArchGenerator(schemas);

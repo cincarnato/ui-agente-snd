@@ -10,23 +10,24 @@ import {
     UserSessionRoutes,
     UserLoginFailRoutes
 } from "@drax/identity-back"
-import {MediaRoutes} from "@drax/media-back"
-import {SettingRoutes} from "@drax/settings-back"
-import {DashboardRoutes} from "@drax/dashboard-back";
-import {AuditRoutes} from "@drax/audit-back";
+import { MediaRoutes } from "@drax/media-back"
+import { SettingRoutes } from "@drax/settings-back"
+import { DashboardRoutes } from "@drax/dashboard-back";
+import { AuditRoutes } from "@drax/audit-back";
 //Local modules routes
-import {GoogleFastifyRoutes} from "../modules/google/routes/GoogleRoutes.js"
-import {HealthRoutes} from "../modules/base/routes/HealthRoutes.js"
-import {NotificationFastifyRoutes} from "../modules/base/routes/NotificationRoutes.js"
+import { GoogleFastifyRoutes } from "../modules/google/routes/GoogleRoutes.js"
+import { HealthRoutes } from "../modules/base/routes/HealthRoutes.js"
+import { NotificationFastifyRoutes } from "../modules/base/routes/NotificationRoutes.js"
+import { AgentFastifyRoutes } from "../modules/agents/routes/AgentRoutes.js"
 
-function FastifyServerFactory(rootDir:string) {
+function FastifyServerFactory(rootDir: string) {
     const server = new FastifyServer(rootDir);
-    server.fastifyDecorateRequest('authUser',null)
+    server.fastifyDecorateRequest('authUser', null)
 
     //MIDDLEWARES
-    server.fastifyHook('onRequest',jwtMiddleware)
-    server.fastifyHook('onRequest',apiKeyMiddleware)
-    server.fastifyHook('onRequest',rbacMiddleware)
+    server.fastifyHook('onRequest', jwtMiddleware)
+    server.fastifyHook('onRequest', apiKeyMiddleware)
+    server.fastifyHook('onRequest', rbacMiddleware)
 
     //IDENTITY ROUTES
     server.fastifyRegister(UserRoutes)
@@ -46,6 +47,7 @@ function FastifyServerFactory(rootDir:string) {
     server.fastifyRegister(GoogleFastifyRoutes)
     server.fastifyRegister(HealthRoutes)
     server.fastifyRegister(NotificationFastifyRoutes)
+    server.fastifyRegister(AgentFastifyRoutes)
 
 
     return server
