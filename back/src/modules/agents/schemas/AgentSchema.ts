@@ -44,7 +44,7 @@ z.object({    key: z.string().optional(),
 const AgentSchema = AgentBaseSchema
     .extend({
       _id: z.coerce.string(),
-       
+      instructions: z.string().optional()
     })
 
 export default AgentSchema;

@@ -1,4 +1,3 @@
-
 interface IAgentBase {
     name: string
     description: string
@@ -10,31 +9,33 @@ interface IAgentBase {
     additionalInstructions?: string
     answeringMachineMessage?: string
     workflow?: Array<{
-    step: string
-    description: string
+        step: string
+        description: string
     }>
     outcomes?: Array<{
-    code: string
-    description: string
+        code: string
+        description: string
     }>
     tools?: Array<{
-    name: string
-    description: string
-    waitToRespond?: boolean
-    params?: Array<{
-    name: string
-    type: string
-    required: boolean
-    description: string
-    }>
-    http?: {    url: string
-    method: string
-    headers?: Array<{
-    key?: string
-    value?: string
-    }>
-    body?: string}
-    responseVariable?: string
+        name: string
+        description: string
+        waitToRespond?: boolean
+        params?: Array<{
+            name: string
+            type: string
+            required: boolean
+            description: string
+        }>
+        http?: {
+            url: string
+            method: string
+            headers?: Array<{
+                key?: string
+                value?: string
+            }>
+            body?: string
+        }
+        responseVariable?: string
     }>
     createdAt?: Date
     updatedAt?: Date
@@ -52,37 +53,40 @@ interface IAgent {
     additionalInstructions?: string
     answeringMachineMessage?: string
     workflow?: Array<{
-    step: string
-    description: string
+        step: string
+        description: string
     }>
     outcomes?: Array<{
-    code: string
-    description: string
+        code: string
+        description: string
     }>
     tools?: Array<{
-    name: string
-    description: string
-    waitToRespond?: boolean
-    params?: Array<{
-    name: string
-    type: string
-    required: boolean
-    description: string
-    }>
-    http?: {    url: string
-    method: string
-    headers?: Array<{
-    key?: string
-    value?: string
-    }>
-    body?: string}
-    responseVariable?: string
+        name: string
+        description: string
+        waitToRespond?: boolean
+        params?: Array<{
+            name: string
+            type: string
+            required: boolean
+            description: string
+        }>
+        http?: {
+            url: string
+            method: string
+            headers?: Array<{
+                key?: string
+                value?: string
+            }>
+            body?: string
+        }
+        responseVariable?: string
     }>
     createdAt?: Date
     updatedAt?: Date
+    instructions?: string
 }
 
 export type {
-IAgentBase, 
-IAgent
+    IAgentBase,
+    IAgent
 }
