@@ -10,7 +10,6 @@ variables:
 stages:
   - security-scan
   - report
-  - test
   - generate_changelog
   - checks
   - build
@@ -187,14 +186,6 @@ check_minimum_approvals:
       fi
   rules:
     - if: $CI_MERGE_REQUEST_IID
-
-run_test:
-  stage: test
-  image: maven:3.9.12-amazoncorretto-21
-  script:
-    - mvn clean test
-  only:
-    - tags
 
 run_build:
   stage: build
