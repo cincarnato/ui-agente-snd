@@ -30,15 +30,13 @@ z.object({    name: z.string().min(1,'validation.required'),
     required: z.boolean(),
     description: z.string().min(1,'validation.required')})
     ).optional(),
-    http: z.array(
-z.object({    url: z.string().min(1,'validation.required'),
+    http: z.object({    url: z.string().min(1,'validation.required'),
     method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE']),
     headers: z.array(
 z.object({    key: z.string().optional(),
     value: z.string().optional()})
     ).optional(),
-    body: z.string().optional()})
-    ).optional(),
+    body: z.string().optional()}),
     responseVariable: z.string().optional()})
     ).optional()
 });

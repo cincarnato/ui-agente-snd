@@ -251,7 +251,7 @@ const AgenteIASchema: IEntitySchema = {
                     }
                 },
                 http: {
-                    type: 'array.object',
+                    type: 'object',
                     required: false,
                     header: false,
                     mdCol: 12,

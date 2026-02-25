@@ -33,15 +33,15 @@ const AgentSchema = new mongoose.Schema<IAgent>({
             required: {type: Boolean,   required: true, index: false, unique: false },
             description: {type: String,   required: true, index: false, unique: false } 
             }],
-            http: [{ 
-                        url: {type: String,   required: true, index: false, unique: false },
+            http: {
+            url: {type: String,   required: true, index: false, unique: false },
             method: {type: String,  enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], required: true, index: false, unique: false },
             headers: [{ 
                         key: {type: String,   required: false, index: false, unique: false },
             value: {type: String,   required: false, index: false, unique: false } 
             }],
             body: {type: String,   required: false, index: false, unique: false } 
-            }],
+            },
             responseVariable: {type: String,   required: false, index: false, unique: false } 
             }]
 }, {timestamps: true});

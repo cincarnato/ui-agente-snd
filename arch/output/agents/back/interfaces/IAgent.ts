@@ -27,15 +27,13 @@ interface IAgentBase {
     required: boolean
     description: string
     }>
-    http?: Array<{
-    url: string
+    http?: {    url: string
     method: string
     headers?: Array<{
     key?: string
     value?: string
     }>
-    body?: string
-    }>
+    body?: string}
     responseVariable?: string
     }>
     createdAt?: Date
@@ -71,15 +69,13 @@ interface IAgent {
     required: boolean
     description: string
     }>
-    http?: Array<{
-    url: string
+    http?: {    url: string
     method: string
     headers?: Array<{
     key?: string
     value?: string
     }>
-    body?: string
-    }>
+    body?: string}
     responseVariable?: string
     }>
     createdAt?: Date

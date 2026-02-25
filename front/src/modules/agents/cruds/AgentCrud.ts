@@ -5,7 +5,7 @@ import type{
   IEntityCrud,
   IEntityCrudField,
   IEntityCrudFilter,
-  IEntityCrudHeader, 
+  IEntityCrudHeader,
   IEntityCrudPermissions,
   IEntityCrudRefs,
   IEntityCrudRules
@@ -23,7 +23,7 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
     super();
     this.name = 'Agent'
   }
-  
+
   static get instance(): AgentCrud {
     if(!AgentCrud.singleton){
       AgentCrud.singleton = new AgentCrud()
@@ -33,10 +33,10 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
 
   get permissions(): IEntityCrudPermissions{
     return {
-      manage: 'agent:manage', 
-      view: 'agent:view', 
-      create: 'agent:create', 
-      update: 'agent:update', 
+      manage: 'agent:manage',
+      view: 'agent:view',
+      create: 'agent:create',
+      update: 'agent:update',
       delete: 'agent:delete'
     }
   }
@@ -46,11 +46,11 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
         {title: 'name',key:'name', align: 'start'}
     ]
   }
-  
+
   get selectedHeaders(): string[] {
     return this.headers.map(header => header.key)
   }
-  
+
   get actionHeaders():IEntityCrudHeader[]{
     return [
       {
@@ -67,10 +67,10 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
   get provider(): IDraxCrudProvider<any, any, any>{
     return AgentProvider.instance
   }
-  
+
   get refs(): IEntityCrudRefs{
     return {
-      
+
     }
   }
 
@@ -109,7 +109,7 @@ tools: []
 {name:'type',type:'enum',label:'type',default:null,hint: 'Tipo de dato del parámetro.',persistentHint: true,placeholder: 'string',persistentPlaceholder: true,enum: ['string', 'number', 'boolean']},
 {name:'required',type:'boolean',label:'required',default:false,hint: 'Indica si el parámetro es obligatorio.',persistentHint: true,placeholder: 'true',persistentPlaceholder: true},
 {name:'description',type:'longString',label:'description',default:'',hint: 'Descripción del parámetro.',persistentHint: true,placeholder: 'Documento nacional de identidad del cliente.',persistentPlaceholder: true}]},
-{name:'http',type:'array.object',label:'http',default:[],hint: 'Configuración de integración HTTP.',persistentHint: true,placeholder: 'Configurar endpoint HTTP.',persistentPlaceholder: true,objectFields: [{name:'url',type:'string',label:'url',default:'',hint: 'URL del endpoint.',persistentHint: true,placeholder: 'https://api.midominio.com/deuda',persistentPlaceholder: true},
+{name:'http',type:'object',label:'http',default:{"url":"","method":null,"headers":[],"body":""},hint: 'Configuración de integración HTTP.',persistentHint: true,placeholder: 'Configurar endpoint HTTP.',persistentPlaceholder: true,objectFields: [{name:'url',type:'string',label:'url',default:'',hint: 'URL del endpoint.',persistentHint: true,placeholder: 'https://api.midominio.com/deuda',persistentPlaceholder: true},
 {name:'method',type:'enum',label:'method',default:null,hint: 'Método HTTP.',persistentHint: true,placeholder: 'POST',persistentPlaceholder: true,enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']},
 {name:'headers',type:'array.object',label:'headers',default:[],hint: 'Cabeceras necesarias para autenticación o contexto.',persistentHint: true,placeholder: 'Agregar headers HTTP.',persistentPlaceholder: true,objectFields: [{name:'key',type:'string',label:'key',default:'',hint: 'Nombre del header.',persistentHint: true,placeholder: 'Authorization',persistentPlaceholder: true},
 {name:'value',type:'string',label:'value',default:'',hint: 'Valor del header.',persistentHint: true,placeholder: 'Bearer {token}',persistentPlaceholder: true}]},
@@ -117,13 +117,13 @@ tools: []
 {name:'responseVariable',type:'string',label:'responseVariable',default:'',hint: 'Variable donde se almacenará la respuesta para uso posterior.',persistentHint: true,placeholder: 'resultadoDeuda',persistentPlaceholder: true}]}
     ]
   }
-  
+
   get filters():IEntityCrudFilter[]{
     return [
       //{name: '_id', type: 'string', label: 'ID', default: '', operator: 'eq' },
     ]
   }
-  
+
   get isViewable(){
     return true
   }
@@ -155,7 +155,7 @@ tools: []
   get isImportable(){
     return true
   }
-  
+
   get isColumnSelectable() {
     return true
   }
@@ -171,16 +171,16 @@ tools: []
   get dialogFullscreen(){
     return false
   }
-  
+
   get tabs() {
     return [
      'Identifier', 'SystemPrompt', 'Workflow', 'Outcomes', 'Tools'
     ]
   }
-  
+
   get menus() {
     return [
-     
+
     ]
   }
 
