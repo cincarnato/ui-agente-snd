@@ -28,10 +28,8 @@ describe("Agent Endpoints Test", function () {
         await testSetup.dropCollection('Agent')
 
         const newAgent: IAgentBase = {
-            agentId: "agent-test-001",
             name: "Test Agent",
             description: "This is a test agent description",
-            version: 1,
 
             role: "You are a helpful assistant that answers questions.",
             behavior: "Respond in a friendly, concise and professional manner.",
@@ -47,9 +45,7 @@ describe("Agent Endpoints Test", function () {
 
         const agent = await resp.json()
         expect(resp.statusCode).toBe(200)
-        expect(agent.agentId).toBe("agent-test-001")
         expect(agent.name).toBe("Test Agent")
-        expect(agent.status).toBe("DRAFT")
         expect(agent._id).toBeDefined()
 
         const getResp = await testSetup.fastifyInstance.inject({
@@ -69,10 +65,8 @@ describe("Agent Endpoints Test", function () {
         await testSetup.dropCollection('Agent')
 
         const newAgent: IAgentBase = {
-            agentId: "agent-update-001",
             name: "Original Agent",
             description: "Original description for the agent",
-            version: 1,
 
             role: "You are an assistant.",
             behavior: "Respond clearly.",
@@ -91,11 +85,9 @@ describe("Agent Endpoints Test", function () {
         expect(agent._id).toBeDefined()
 
         const updateData: IAgentBase = {
-            agentId: "agent-update-001",
             name: "Updated Agent",
             description: "Updated description for the agent",
-            version: 1,
-            status: "ACTIVE",
+
             role: "You are an expert assistant.",
             behavior: "Respond clearly and professionally.",
             mission: "Help users solve their problems efficiently.",
@@ -111,7 +103,6 @@ describe("Agent Endpoints Test", function () {
         expect(updateResp.statusCode).toBe(200)
         const updatedAgent = await updateResp.json()
         expect(updatedAgent.name).toBe("Updated Agent")
-        expect(updatedAgent.status).toBe("ACTIVE")
 
         const verifyResp = await testSetup.fastifyInstance.inject({
             method: 'GET',
@@ -130,10 +121,8 @@ describe("Agent Endpoints Test", function () {
         await testSetup.dropCollection('Agent')
 
         const newAgent: IAgentBase = {
-            agentId: "agent-patch-001",
             name: "Agent Before Patch",
             description: "Description before patch",
-            version: 1,
 
             role: "You are an assistant.",
             behavior: "Respond clearly.",
@@ -152,7 +141,6 @@ describe("Agent Endpoints Test", function () {
 
         const updateData: any = {
             name: "Agent After Patch",
-            status: "ACTIVE"
         }
 
         const updateResp = await testSetup.fastifyInstance.inject({
@@ -165,7 +153,6 @@ describe("Agent Endpoints Test", function () {
         expect(updateResp.statusCode).toBe(200)
         const updatedAgent = await updateResp.json()
         expect(updatedAgent.name).toBe("Agent After Patch")
-        expect(updatedAgent.status).toBe("ACTIVE")
 
         const verifyResp = await testSetup.fastifyInstance.inject({
             method: 'GET',
@@ -184,7 +171,6 @@ describe("Agent Endpoints Test", function () {
         await testSetup.dropCollection('Agent')
 
         const newAgent: IAgentBase = {
-            agentId: "agent-delete-001",
             name: "Agent To Delete",
             description: "This agent will be deleted",
 
@@ -237,7 +223,6 @@ describe("Agent Endpoints Test", function () {
             },
             {
                 agentId: "paginate-002", name: "Agent 2", description: "Paginate test agent 2",
-            status: "ACTIVE",
                 role: "Expert assistant.", behavior: "Professional behavior.", mission: "Solve problems."
             },
         ]
@@ -283,7 +268,6 @@ describe("Agent Endpoints Test", function () {
             },
             {
                 agentId: "other-001", name: "Other Agent", description: "Other agent description",
-            status: "ACTIVE",
                 role: "Expert.", behavior: "Professional.", mission: "Solve problems."
             },
         ]
@@ -319,7 +303,6 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "filter-001", name: "Active Agent", description: "An active agent",
-            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
@@ -340,7 +323,7 @@ describe("Agent Endpoints Test", function () {
 
         const findResp = await testSetup.fastifyInstance.inject({
             method: 'GET',
-            url: '/api/agents/find?filters=status;eq;ACTIVE',
+            url: '/api/agents/find?filters=name;eq;Active Agent',
             headers: { Authorization: `Bearer ${accessToken}` }
         })
 
@@ -359,12 +342,10 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "group-001", name: "Group Agent 1", description: "Group test agent 1",
-            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "group-002", name: "Group Agent 2", description: "Group test agent 2",
-            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
@@ -385,16 +366,18 @@ describe("Agent Endpoints Test", function () {
 
         const groupResp = await testSetup.fastifyInstance.inject({
             method: 'GET',
-            url: '/api/agents/group-by?fields=status',
+            url: '/api/agents/group-by?fields=role',
             headers: { Authorization: `Bearer ${accessToken}` }
         })
 
         const groupResult = await groupResp.json()
         expect(groupResp.statusCode).toBe(200)
-        expect(groupResult[0].count).toBe(2)
-        expect(groupResult[0].status).toBe('ACTIVE')
-        expect(groupResult[1].count).toBe(1)
-        expect(groupResult[1].status).toBe('DRAFT')
+
+        const assistantGroup = groupResult.find((g: any) => g.role === "Assistant.")
+        const expertGroup = groupResult.find((g: any) => g.role === "Expert.")
+
+        expect(assistantGroup?.count).toBe(2)
+        expect(expertGroup?.count).toBe(1)
     })
 
     it("should handle error responses correctly when agent is not found", async () => {
