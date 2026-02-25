@@ -1,17 +1,13 @@
 #BULDER
 FROM node:24-slim as builder
 
-# Native deps for node-gyp (better-sqlite3, etc.)
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3 make g++ \
-  && rm -rf /var/lib/apt/lists/*
 
 #BACKEND Dependencies
 COPY ./back/package.json /workspace/back/package.json
 COPY ./back/package-lock.json /workspace/back/package-lock.json
 
 WORKDIR /workspace/back
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 
 #FRONTEND Dependencies
@@ -40,11 +36,12 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends bash \
   && rm -rf /var/lib/apt/lists/*
 
+
 RUN npm install pm2 -g
 
 COPY --from=builder /workspace/out /app
 
 WORKDIR /app
-RUN npm install --only=production
+RUN npm install --only=production --legacy-peer-deps
 
 ENTRYPOINT ["pm2-runtime", "start", "index.js"]
