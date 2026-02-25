@@ -1,5 +1,5 @@
 #BULDER
-FROM node:20.18.0-alpine3.20 as builder
+FROM node:24-alpine as builder
 
 #BACKEND Dependencies
 COPY ./back/package.json /workspace/back/package.json
@@ -29,7 +29,7 @@ WORKDIR /workspace/front
 RUN npm run build
 
 #RUNNER
-FROM node:20.10.0-alpine3.19
+FROM node:24-alpine
 
 RUN apk add bash
 RUN npm install pm2 -g

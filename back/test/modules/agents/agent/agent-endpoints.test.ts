@@ -32,7 +32,7 @@ describe("Agent Endpoints Test", function () {
             name: "Test Agent",
             description: "This is a test agent description",
             version: 1,
-            status: "DRAFT",
+
             role: "You are a helpful assistant that answers questions.",
             behavior: "Respond in a friendly, concise and professional manner.",
             mission: "Help users find answers to their questions efficiently.",
@@ -73,7 +73,7 @@ describe("Agent Endpoints Test", function () {
             name: "Original Agent",
             description: "Original description for the agent",
             version: 1,
-            status: "DRAFT",
+
             role: "You are an assistant.",
             behavior: "Respond clearly.",
             mission: "Help users.",
@@ -134,7 +134,7 @@ describe("Agent Endpoints Test", function () {
             name: "Agent Before Patch",
             description: "Description before patch",
             version: 1,
-            status: "DRAFT",
+
             role: "You are an assistant.",
             behavior: "Respond clearly.",
             mission: "Help users.",
@@ -187,8 +187,8 @@ describe("Agent Endpoints Test", function () {
             agentId: "agent-delete-001",
             name: "Agent To Delete",
             description: "This agent will be deleted",
-            version: 1,
-            status: "DRAFT",
+
+
             role: "You are an assistant.",
             behavior: "Respond clearly.",
             mission: "Help users.",
@@ -232,12 +232,12 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "paginate-001", name: "Agent 1", description: "Paginate test agent 1",
-                version: 1, status: "DRAFT",
+
                 role: "Assistant role.", behavior: "Friendly behavior.", mission: "Help users."
             },
             {
                 agentId: "paginate-002", name: "Agent 2", description: "Paginate test agent 2",
-                version: 1, status: "ACTIVE",
+            status: "ACTIVE",
                 role: "Expert assistant.", behavior: "Professional behavior.", mission: "Solve problems."
             },
         ]
@@ -273,17 +273,17 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "search-001", name: "Search Agent Alpha", description: "Alpha search agent",
-                version: 1, status: "DRAFT",
+
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "search-002", name: "Search Agent Beta", description: "Beta search agent",
-                version: 1, status: "DRAFT",
+
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "other-001", name: "Other Agent", description: "Other agent description",
-                version: 1, status: "ACTIVE",
+            status: "ACTIVE",
                 role: "Expert.", behavior: "Professional.", mission: "Solve problems."
             },
         ]
@@ -319,12 +319,12 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "filter-001", name: "Active Agent", description: "An active agent",
-                version: 1, status: "ACTIVE",
+            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "filter-002", name: "Draft Agent", description: "A draft agent",
-                version: 1, status: "DRAFT",
+
                 role: "Expert.", behavior: "Professional.", mission: "Solve problems."
             },
         ]
@@ -359,17 +359,17 @@ describe("Agent Endpoints Test", function () {
         const agentsData = [
             {
                 agentId: "group-001", name: "Group Agent 1", description: "Group test agent 1",
-                version: 1, status: "ACTIVE",
+            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "group-002", name: "Group Agent 2", description: "Group test agent 2",
-                version: 1, status: "ACTIVE",
+            status: "ACTIVE",
                 role: "Assistant.", behavior: "Friendly.", mission: "Help users."
             },
             {
                 agentId: "group-003", name: "Group Agent 3", description: "Group test agent 3",
-                version: 1, status: "DRAFT",
+
                 role: "Expert.", behavior: "Professional.", mission: "Solve problems."
             },
         ]
@@ -471,8 +471,8 @@ describe("Agent Endpoints Test", function () {
                 agentId: "ghost-agent",
                 name: "Non-existent Agent",
                 description: "This agent does not exist",
-                version: 1,
-                status: "DRAFT",
+
+
                 role: "Assistant.",
                 behavior: "Friendly.",
                 mission: "Help users."
