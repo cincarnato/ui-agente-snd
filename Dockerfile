@@ -1,5 +1,10 @@
 #BULDER
-FROM node:24-alpine as builder
+FROM node:24-slim as builder
+
+# Native deps for node-gyp (better-sqlite3, etc.)
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ \
+  && rm -rf /var/lib/apt/lists/*
 
 #BACKEND Dependencies
 COPY ./back/package.json /workspace/back/package.json
@@ -29,9 +34,12 @@ WORKDIR /workspace/front
 RUN npm run build
 
 #RUNNER
-FROM node:24-alpine
+FROM node:24-slim
 
-RUN apk add bash
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends bash \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN npm install pm2 -g
 
 COPY --from=builder /workspace/out /app
