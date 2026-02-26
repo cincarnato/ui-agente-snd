@@ -32,7 +32,7 @@ interface IAgentBase {
             required: boolean
             description: string
         }>
-        instructionsUpdate: string
+        instructionsUpdate?: string
         http?: {
             url: string
             method: string
@@ -83,7 +83,7 @@ interface IAgent {
             required: boolean
             description: string
         }>
-        instructionsUpdate: string
+        instructionsUpdate?: string
         http?: {
             url: string
             method: string

@@ -11,7 +11,7 @@ const AgentBaseSchema = z.object({
             required: z.boolean(),
             description: z.string().min(1, 'validation.required')
         })
-    ).optional(),
+    ).optional().default([]),
     role: z.string().min(1, 'validation.required'),
     behavior: z.string().min(1, 'validation.required'),
     mission: z.string().min(1, 'validation.required'),
@@ -35,6 +35,7 @@ const AgentBaseSchema = z.object({
         z.object({
             name: z.string().min(1, 'validation.required'),
             description: z.string().min(1, 'validation.required'),
+            instructionsUpdate: z.string().optional().nullable(),
             waitToRespond: z.boolean().optional(),
             params: z.array(
                 z.object({
