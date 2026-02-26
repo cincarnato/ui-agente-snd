@@ -9,6 +9,11 @@ const messages = {
           field:{
                        name:'name',
            description:'description',
+           inputVariables:'inputVariables',
+           name: 'name',
+           type: 'type',
+           required: 'required',
+           description: 'description',
            role:'role',
            behavior:'behavior',
            mission:'mission',
@@ -27,6 +32,7 @@ const messages = {
            description: 'description',
            waitToRespond: 'waitToRespond',
            params: 'params',
+           instructionsUpdate: 'instructionsUpdate',
            http: 'http',
            responseVariable: 'responseVariable'
           }
@@ -47,6 +53,11 @@ const messages = {
           field:{
                        name:'name',
            description:'description',
+           inputVariables:'inputVariables',
+           name: 'name',
+           type: 'type',
+           required: 'required',
+           description: 'description',
            role:'role',
            behavior:'behavior',
            mission:'mission',
@@ -65,6 +76,7 @@ const messages = {
            description: 'description',
            waitToRespond: 'waitToRespond',
            params: 'params',
+           instructionsUpdate: 'instructionsUpdate',
            http: 'http',
            responseVariable: 'responseVariable'
           }

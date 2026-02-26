@@ -8,6 +8,12 @@ import type {IAgent} from '../interfaces/IAgent'
 const AgentSchema = new mongoose.Schema<IAgent>({
             name: {type: String,   required: true, index: true, unique: false },
             description: {type: String,   required: true, index: false, unique: false },
+            inputVariables: [{ 
+                        name: {type: String,   required: true, index: false, unique: false },
+            type: {type: String,  enum: ['string', 'number', 'boolean'], required: true, index: false, unique: false },
+            required: {type: Boolean,   required: true, index: false, unique: false },
+            description: {type: String,   required: true, index: false, unique: false } 
+            }],
             role: {type: String,   required: true, index: false, unique: false },
             behavior: {type: String,   required: true, index: false, unique: false },
             mission: {type: String,   required: true, index: false, unique: false },
@@ -33,6 +39,7 @@ const AgentSchema = new mongoose.Schema<IAgent>({
             required: {type: Boolean,   required: true, index: false, unique: false },
             description: {type: String,   required: true, index: false, unique: false } 
             }],
+            instructionsUpdate: {type: String,   required: true, index: false, unique: false },
             http: {
             url: {type: String,   required: true, index: false, unique: false },
             method: {type: String,  enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], required: true, index: false, unique: false },

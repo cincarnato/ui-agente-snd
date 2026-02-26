@@ -41,9 +41,7 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
   }
 
   get headers(): IEntityCrudHeader[] {
-    return [
-      {title: 'name', key: 'name', align: 'start'}
-    ]
+    return this.fields.map(header => ({title: header.name, key: header.name, align: 'start'}))
   }
 
   get selectedHeaders(): string[] {
@@ -107,6 +105,58 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
         persistentHint: false,
         placeholder: 'Agente especializado en gestión de cobranzas mediante canal voicebot.',
         persistentPlaceholder: true
+      },
+      {
+        name: 'inputVariables',
+        type: 'array.object',
+        label: 'inputVariables',
+        default: [],
+        hint: 'Parámetros que se requieren para iniciar el agente.',
+        persistentHint: true,
+        placeholder: 'Definir variables de entrada que se pueden utilizar en el systemPrompt.',
+        persistentPlaceholder: true,
+        groupTab: 'Variables',
+        objectFields: [{
+          name: 'name',
+          type: 'string',
+          label: 'name',
+          default: '',
+          hint: 'Nombre del parámetro.',
+          persistentHint: true,
+          placeholder: 'dni',
+          persistentPlaceholder: true
+        },
+          {
+            name: 'type',
+            type: 'enum',
+            label: 'type',
+            default: null,
+            hint: 'Tipo de dato del parámetro.',
+            persistentHint: true,
+            placeholder: 'string',
+            persistentPlaceholder: true,
+            enum: ['string', 'number', 'boolean']
+          },
+          {
+            name: 'required',
+            type: 'boolean',
+            label: 'required',
+            default: false,
+            hint: 'Indica si el parámetro es obligatorio.',
+            persistentHint: true,
+            placeholder: 'true',
+            persistentPlaceholder: true
+          },
+          {
+            name: 'description',
+            type: 'longString',
+            label: 'description',
+            default: '',
+            hint: 'Descripción del parámetro.',
+            persistentHint: true,
+            placeholder: 'Documento nacional de identidad del cliente.',
+            persistentPlaceholder: true
+          }]
       },
       {
         name: 'role',
@@ -280,16 +330,7 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
             placeholder: 'Consulta el saldo actualizado del cliente.',
             persistentPlaceholder: true
           },
-          {
-            name: 'waitToRespond',
-            type: 'boolean',
-            label: 'waitToRespond',
-            default: false,
-            hint: 'Indica si el agente debe esperar la respuesta antes de continuar.',
-            persistentHint: false,
-            placeholder: 'true',
-            persistentPlaceholder: true
-          },
+
           {
             name: 'params',
             type: 'array.object',
@@ -340,6 +381,17 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
                 placeholder: 'Documento nacional de identidad del cliente.',
                 persistentPlaceholder: true
               }]
+          },
+
+          {
+            name: 'instructionsUpdate',
+            type: 'longString',
+            label: 'instructionsUpdate',
+            default: '',
+            hint: 'Actualiza el systemPrompt (comportamiento del agente) si esta tool es invocada.',
+            persistentHint: true,
+            placeholder: 'Ahora tu rol es... y tu mision es...',
+            persistentPlaceholder: true
           },
           {
             name: 'http',
@@ -413,6 +465,16 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
               }]
           },
           {
+            name: 'waitToRespond',
+            type: 'boolean',
+            label: 'waitToRespond',
+            default: false,
+            hint: 'Indica si el agente debe esperar la respuesta antes de continuar.',
+            persistentHint: false,
+            placeholder: 'true',
+            persistentPlaceholder: true
+          },
+          {
             name: 'responseVariable',
             type: 'string',
             label: 'responseVariable',
@@ -482,7 +544,7 @@ class AgentCrud extends EntityCrud implements IEntityCrud {
 
   get tabs() {
     return [
-      'Identifier', 'SystemPrompt', 'Workflow', 'Outcomes', 'Tools'
+      'Identifier', 'Variables','SystemPrompt', 'Workflow', 'Outcomes', 'Tools'
     ]
   }
 

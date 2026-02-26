@@ -2,6 +2,12 @@
 interface IAgentBase {
     name: string
     description: string
+    inputVariables?: Array<{
+    name: string
+    type: string
+    required: boolean
+    description: string
+    }>
     role: string
     behavior: string
     mission: string
@@ -27,6 +33,7 @@ interface IAgentBase {
     required: boolean
     description: string
     }>
+    instructionsUpdate: string
     http?: {    url: string
     method: string
     headers?: Array<{
@@ -44,6 +51,12 @@ interface IAgent {
     _id: string
     name: string
     description: string
+    inputVariables?: Array<{
+    name: string
+    type: string
+    required: boolean
+    description: string
+    }>
     role: string
     behavior: string
     mission: string
@@ -69,6 +82,7 @@ interface IAgent {
     required: boolean
     description: string
     }>
+    instructionsUpdate: string
     http?: {    url: string
     method: string
     headers?: Array<{

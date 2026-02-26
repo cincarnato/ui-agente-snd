@@ -32,6 +32,51 @@ const AgenteIASchema: IEntitySchema = {
             hint: 'Descripción funcional del agente y su propósito general.',
             persistentHint: true
         },
+        inputVariables: {
+            type: 'array.object',
+            required: false,
+            header: false,
+            mdCol: 12,
+            placeholder: 'Definir variables de entrada que se pueden utilizar en el systemPrompt.',
+            persistentPlaceholder: true,
+            hint: 'Parámetros que se requieren para iniciar el agente.',
+            persistentHint: true,
+            schema: {
+                name: {
+                    type: 'string',
+                    required: true,
+                    placeholder: 'dni',
+                    persistentPlaceholder: true,
+                    hint: 'Nombre del parámetro.',
+                    persistentHint: true
+                },
+                type: {
+                    type: 'enum',
+                    enum: ['string', 'number', 'boolean'],
+                    required: true,
+                    placeholder: 'string',
+                    persistentPlaceholder: true,
+                    hint: 'Tipo de dato del parámetro.',
+                    persistentHint: true
+                },
+                required: {
+                    type: 'boolean',
+                    required: true,
+                    placeholder: 'true',
+                    persistentPlaceholder: true,
+                    hint: 'Indica si el parámetro es obligatorio.',
+                    persistentHint: true
+                },
+                description: {
+                    type: 'longString',
+                    required: true,
+                    placeholder: 'Documento nacional de identidad del cliente.',
+                    persistentPlaceholder: true,
+                    hint: 'Descripción del parámetro.',
+                    persistentHint: true
+                },
+            }
+        },
         role: {
             type: 'longString',
             required: true,
@@ -249,6 +294,14 @@ const AgenteIASchema: IEntitySchema = {
                             persistentHint: true
                         },
                     }
+                },
+                instructionsUpdate: {
+                    type: 'longString',
+                    required: true,
+                    placeholder: 'Ahora tu rol es... y tu mision es...',
+                    persistentPlaceholder: true,
+                    hint: 'Actualiza el systemPrompt (comportamiento del agente) si esta tool es invocada.',
+                    persistentHint: true
                 },
                 http: {
                     type: 'object',

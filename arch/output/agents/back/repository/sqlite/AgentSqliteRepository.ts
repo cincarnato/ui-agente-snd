@@ -19,6 +19,7 @@ class AgentSqliteRepository extends AbstractSqliteRepository<IAgent, IAgentBase,
     protected tableFields: SqliteTableField[] = [
         {name: "name", type: "TEXT", unique: undefined, primary: false},
 {name: "description", type: "TEXT", unique: undefined, primary: false},
+{name: "inputVariables", type: "TEXT", unique: undefined, primary: false},
 {name: "role", type: "TEXT", unique: undefined, primary: false},
 {name: "behavior", type: "TEXT", unique: undefined, primary: false},
 {name: "mission", type: "TEXT", unique: undefined, primary: false},
